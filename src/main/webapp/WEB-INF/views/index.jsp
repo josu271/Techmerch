@@ -1,4 +1,5 @@
-<%@ include file="layout/header.jsp" %>
+<%@ page contentType="text/html;charset=UTF-8" %>
+<%@ include file="/WEB-INF/views/layout/navbar.jsp" %>
 
 <section class="hero">
     <h1>Bienvenido a <span class="resaltado">TecMerch</span></h1>
@@ -27,4 +28,3 @@
     </div>
 </section>
 
-<%@ include file="layout/footer.jsp" %>
