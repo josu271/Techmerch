@@ -1,30 +1,108 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
-<%@ include file="/WEB-INF/views/layout/navbar.jsp" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<link rel="stylesheet" href="<c:url value='/Css/main.css' />">
 
-<section class="hero">
-    <h1>Bienvenido a <span class="resaltado">TecMerch</span></h1>
-    <p>Compra las mejores computadoras y accede a nuestro servicio técnico especializado.</p>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TiendaTech</title>
+  <!-- CSS principal -->
+  <link rel="stylesheet" href="<c:url value='/Css/main.css' />">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+</head>
+<body>
+
+  <%@ include file="layout/navbar.jsp" %>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h1>Las mejores computadoras <br> <span class="resaltado">a los mejores precios</span></h1>
+    <p>Encuentra laptops, desktops y accesorios de las mejores marcas</p>
     <div class="botones-hero">
-        <button class="btn-primario">Ver Ofertas</button>
-        <button class="btn-secundario">Saber Más</button>
+      <button class="btn-primario">Ver Productos</button>
+      <button class="btn-oferta">Ofertas Especiales</button>
     </div>
-</section>
+  </section>
 
-<section class="beneficios">
+  <!-- BENEFICIOS -->
+  <section class="beneficios">
     <div class="beneficio">
-        <i class="fa-solid fa-truck"></i>
-        <h3>Envío rápido</h3>
-        <p>Recibe tus pedidos en 48h</p>
+      <i class="bi bi-truck"></i>
+      <h3>Envío Gratis</h3>
+      <p>En compras mayores a $50</p>
     </div>
     <div class="beneficio">
-        <i class="fa-solid fa-shield-halved"></i>
-        <h3>Garantía</h3>
-        <p>Hasta 2 años de soporte</p>
+      <i class="bi bi-shield-check"></i>
+      <h3>Garantía</h3>
+      <p>Hasta 3 años de garantía</p>
     </div>
     <div class="beneficio">
-        <i class="fa-solid fa-headset"></i>
-        <h3>Soporte 24/7</h3>
-        <p>Estamos para ayudarte</p>
+      <i class="bi bi-headset"></i>
+      <h3>Soporte 24/7</h3>
+      <p>Asistencia técnica siempre</p>
     </div>
-</section>
+    <div class="beneficio">
+      <i class="bi bi-credit-card"></i>
+      <h3>Financiamiento</h3>
+      <p>Hasta 24 meses sin intereses</p>
+    </div>
+  </section>
 
+  <!-- CATEGORÍAS -->
+  <section class="categorias">
+    <h2>Explora por Categorías</h2>
+    <div class="grid-categorias">
+      <div class="tarjeta-categoria">
+        <img src="<c:url value='/img/MacBook Pro 16M3 Max.jpg' />" alt="Laptops">
+        <span>Laptops</span>
+      </div>
+      <div class="tarjeta-categoria">
+        <img src="<c:url value='/img/ASUS ROG Strix G15 Gaming.jpg' />" alt="Gaming">
+        <span>Gaming</span>
+      </div>
+      <div class="tarjeta-categoria">
+        <img src="<c:url value='/img/Custom Gaming Desktop RTX 4080.jpg' />" alt="Escritorios">
+        <span>Escritorios</span>
+      </div>
+      <div class="tarjeta-categoria">
+        <img src="<c:url value='/img/Dell XPS 15 OLED.jpg' />" alt="Accesorios">
+        <span>Accesorios</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRODUCTOS DESTACADOS -->
+  <section class="destacados">
+    <h2>Productos Destacados</h2>
+    <p>Los equipos más populares y mejor valorados</p>
+    <div class="grid-productos">
+      <div class="tarjeta-producto">
+        <div class="etiqueta">Oferta</div>
+        <img src="<c:url value='/img/MacBook Pro 16M3 Max.jpg' />" alt="MacBook Pro">
+        <h3>MacBook Pro 16” M3 Max</h3>
+        <p class="marca">Apple</p>
+        <p class="precio">$2499 <span class="precio-anterior">$2899</span></p>
+        <div class="acciones-producto">
+          <button class="btn-secundario">Detalles</button>
+          <button class="btn-primario">Añadir</button>
+        </div>
+      </div>
+      <!-- ... repite tus demás productos -->
+    </div>
+    <button class="btn-ver-todo">Ver Todos los Productos</button>
+  </section>
+
+  <!-- SUSCRIPCIÓN -->
+  <section class="suscripcion">
+    <h2>¡Mantente Actualizado!</h2>
+    <p>Recibe ofertas exclusivas y las últimas noticias tecnológicas</p>
+    <div class="form-suscripcion">
+      <input type="email" placeholder="Tu correo">
+      <button class="btn-primario">Suscribirse</button>
+    </div>
+  </section>
+
+</body>
+</html>
