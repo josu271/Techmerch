@@ -21,9 +21,10 @@
     <h1>Las mejores computadoras <br> <span class="resaltado">a los mejores precios</span></h1>
     <p>Encuentra laptops, desktops y accesorios de las mejores marcas</p>
     <div class="botones-hero">
-      <button class="btn-primario">Ver Productos</button>
+      <a href="<c:url value='/productos' />" class="btn-primario">Ver Productos</a>
       <button class="btn-oferta">Ofertas Especiales</button>
     </div>
+
   </section>
 
   <!-- BENEFICIOS -->
@@ -100,7 +101,10 @@
     <p>Recibe ofertas exclusivas y las últimas noticias tecnológicas</p>
     <div class="form-suscripcion">
       <input type="email" placeholder="Tu correo">
-      <button class="btn-primario">Suscribirse</button>
+      <button onclick="location.href='<c:url value='/productos' />'" class="btn-ver-todo">
+        Ver Todos los Productos
+      </button>
+
     </div>
   </section>
 
