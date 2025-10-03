@@ -19,4 +19,13 @@ public class HomeController {
     public String contacto() {
         return "contacto"; // Busca en /WEB-INF/views/contacto.jsp
     }
+    @GetMapping("/login")
+    public String login() {
+        return "login"; // Busca en /WEB-INF/views/contacto.jsp
+    }
+    @GetMapping("/serviciotecnico")
+    public String serviciotecnico() {
+        return "serviciotecnico"; // Busca en /WEB-INF/views/contacto.jsp
+    }
+
 }

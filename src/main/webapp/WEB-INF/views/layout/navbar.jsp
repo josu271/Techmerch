@@ -27,6 +27,8 @@
         <a href="${pageContext.request.contextPath}/">Inicio</a>
         <a href="${pageContext.request.contextPath}/productos">Productos</a>
         <a href="${pageContext.request.contextPath}/contacto">Contacto</a>
+        <a href="${pageContext.request.contextPath}/serviciotecnico">Servicio Tecnico</a>
+        <a href="${pageContext.request.contextPath}/login">Login</a>
         <i class="fa-solid fa-cart-shopping"></i>
     </nav>
 </header>
