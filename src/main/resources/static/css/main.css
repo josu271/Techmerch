@@ -1,0 +1,249 @@
+/* ====== RESET ====== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: Arial, sans-serif;
+}
+
+body {
+  background: #fff;
+  color: #333;
+}
+
+.btn-oferta {
+  background: #ffcc00;
+  border: none;
+  padding: 10px 15px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* ====== HERO ====== */
+.hero {
+  background: linear-gradient(90deg, #0046b8, #0056d2);
+  color: #fff;
+  text-align: center;
+  padding: 80px 20px;
+}
+
+.hero h1 {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.hero .resaltado {
+  color: #ffcc00;
+}
+
+.hero p {
+  margin: 15px 0;
+  font-size: 18px;
+}
+
+.botones-hero {
+  margin-top: 20px;
+}
+
+.btn-primario {
+  background: #ffcc00;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-right: 10px;
+  font-weight: bold;
+}
+
+.btn-secundario {
+  background: transparent;
+  border: 2px solid #0056d2;
+  color: #0056d2;
+  padding: 10px 18px;
+  font-size: 16px;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.btn-ver-todo {
+  margin-top: 20px;
+  background: #0056d2;
+  color: #fff;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+/* ====== BENEFICIOS ====== */
+.beneficios {
+  display: flex;
+  justify-content: space-around;
+  padding: 40px 20px;
+  background: #f9f9f9;
+}
+
+.beneficio {
+  text-align: center;
+  max-width: 200px;
+}
+
+.beneficio i {
+  font-size: 40px;
+  color: #0056d2;
+}
+
+.beneficio h3 {
+  margin: 10px 0;
+  font-size: 18px;
+}
+
+.beneficio p {
+  color: #555;
+}
+
+/* ====== CATEGORÍAS ====== */
+.categorias {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.grid-categorias {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.tarjeta-categoria {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.tarjeta-categoria img {
+  width: 100%;
+  height: 150px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.tarjeta-categoria span {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  padding: 5px 10px;
+  border-radius: 4px;
+}
+
+.tarjeta-categoria:hover img {
+  transform: scale(1.05);
+}
+
+/* ====== PRODUCTOS DESTACADOS ====== */
+.destacados {
+  text-align: center;
+  padding: 50px 20px;
+}
+
+.grid-productos {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.tarjeta-producto {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 15px;
+  text-align: left;
+  position: relative;
+  transition: box-shadow 0.3s ease;
+}
+
+.tarjeta-producto:hover {
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.tarjeta-producto img {
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+.tarjeta-producto h3 {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.tarjeta-producto .marca {
+  color: #777;
+  font-size: 14px;
+  margin-bottom: 8px;
+}
+
+.tarjeta-producto .precio {
+  font-weight: bold;
+  color: #0056d2;
+  font-size: 18px;
+}
+
+.precio-anterior {
+  text-decoration: line-through;
+  color: #999;
+  margin-left: 5px;
+  font-size: 14px;
+}
+
+.etiqueta {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: red;
+  color: #fff;
+  font-size: 12px;
+  padding: 3px 6px;
+  border-radius: 4px;
+}
+
+.acciones-producto {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+/* ====== SUSCRIPCIÓN ====== */
+.suscripcion {
+  background: #1e5cf5;
+  color: #fff;
+  text-align: center;
+  padding: 40px 20px;
+}
+
+.form-suscripcion {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+}
+
+.form-suscripcion input {
+  padding: 10px;
+  border-radius: 6px;
+  border: none;
+  width: 250px;
+}
+
+.form-suscripcion .btn-primario {
+  background: #ffcc00;
+  color: #000;
+}
