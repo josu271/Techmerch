@@ -15,4 +15,8 @@ public class HomeController {
     public String productos() {
         return "productos"; // busca en /WEB-INF/views/productos.jsp
     }
+    @GetMapping("/contacto")
+    public String contacto() {
+        return "contacto"; // Busca en /WEB-INF/views/contacto.jsp
+    }
 }
