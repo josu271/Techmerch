@@ -31,5 +31,14 @@ public class HomeController {
     public String panel() {
         return "panel"; // busca en /WEB-INF/views/panel.jsp
     }
+    @GetMapping("/ventas")
+    public String ventas() {
+        return "ventas"; // busca en /WEB-INF/views/ventas.jsp
+    }
+    @GetMapping("/articulo")
+    public String articulo() {
+        return "articulo"; // busca en /WEB-INF/views/articulo.jsp
+    }
+
 
 }
