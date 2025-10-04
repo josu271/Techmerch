@@ -1,0 +1,86 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', sans-serif;
+  background-color: #f4f6f9;
+}
+
+/* CONTENEDOR */
+.contenedor {
+  display: flex;
+  height: 100vh;
+}
+
+/* CONTENIDO */
+.contenido {
+  flex: 1;
+  padding: 1rem 2rem;
+
+}
+
+/* TOPBAR */
+.topbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* DASHBOARD */
+.dashboard {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.dashboard .card {
+  flex: 1;
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.dashboard .dato {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #1e40af;
+}
+
+/* TABLAS */
+.tablas {
+  margin-bottom: 2rem;
+}
+
+.tablas table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.tablas th, .tablas td {
+  padding: 12px;
+  text-align: left;
+}
+
+.tablas thead {
+  background: #1e40af;
+  color: white;
+}
+
+.tablas tbody tr:nth-child(even) {
+  background: #f1f5f9;
+}

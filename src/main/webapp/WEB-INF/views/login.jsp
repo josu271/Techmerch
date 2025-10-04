@@ -14,7 +14,9 @@
 <section class="login-section">
     <div class="login-container">
         <h1>Iniciar Sesión</h1>
-        <form class="login-form">
+        <!-- solo frontend, redirige directo al panel -->
+        <form class="login-form" action="${pageContext.request.contextPath}/panel" method="get">
+
             <label for="usuario">Usuario:</label>
             <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario" required>
 
