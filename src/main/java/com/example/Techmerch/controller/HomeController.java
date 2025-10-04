@@ -39,6 +39,11 @@ public class HomeController {
     public String articulo() {
         return "articulo"; // busca en /WEB-INF/views/articulo.jsp
     }
+    @GetMapping("/reporte")
+    public String reporte() {
+        return "reporte";
+    }
+
 
 
 }
