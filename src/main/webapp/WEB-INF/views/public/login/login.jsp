@@ -14,19 +14,23 @@
 <section class="login-section">
     <div class="login-container">
         <h1>Iniciar Sesión</h1>
-        <!-- solo frontend, redirige directo al panel -->
-        <form class="login-form" action="${pageContext.request.contextPath}/panel" method="get">
 
-            <label for="usuario">Usuario:</label>
-            <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario" required>
+        <form class="login-form" action="${pageContext.request.contextPath}/login" method="post">
+
+            <label for="correo">Correo:</label>
+            <input type="email" id="correo" name="correo" placeholder="Ingresa tu correo" required>
 
             <label for="password">Contraseña:</label>
-            <input type="password" id="password" name="password" placeholder="Ingresa tu contraseña" required>
+            <input type="password" id="password" name="contrasena" placeholder="Ingresa tu contraseña" required>
 
             <button type="submit"><i class="bi bi-box-arrow-in-right"></i> Iniciar Sesión</button>
         </form>
-        <p class="registro-texto">¿No tienes cuenta? <a href="registro.jsp">Regístrate aquí</a></p>
-    </div>
+
+        <!-- Mostrar error -->
+        <c:if test="${not empty error}">
+            <p class="text-danger mt-3">${error}</p>
+        </c:if>
+
 </section>
 
 </body>

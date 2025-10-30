@@ -1,65 +1,70 @@
 -- ======================================
--- Categorias
+-- INSERCIONES: Categorias
 -- ======================================
 INSERT INTO Categorias (Nombre, Descripcion, Estado) VALUES
-('Laptops', 'Portátiles de diversas marcas', true),
-('Accesorios', 'Periféricos y componentes', true),
-('Componentes', 'Piezas internas de PC', true),
-('Servicios Técnicos', 'Reparaciones y mantenimiento', true);
+('Laptops', 'Computadoras portátiles', TRUE),
+('Smartphones', 'Teléfonos inteligentes', TRUE),
+('Tablets', 'Dispositivos tablet', TRUE),
+('Accesorios', 'Accesorios para dispositivos', TRUE),
+('Reparación', 'Servicios de reparación', TRUE);
 
 -- ======================================
--- Producto
+-- INSERCIONES: Usuario
 -- ======================================
-INSERT INTO Producto (ID_Categoria, Nombre, Descripcion, Tipo_Producto, Precio, Stock) VALUES
-(1, 'Laptop HP Pavilion', 'Laptop 15.6” i5 16GB RAM', 'Laptop', 3200.00, 10),
-(1, 'Laptop Lenovo IdeaPad 3', 'Laptop Ryzen 5 8GB RAM', 'Laptop', 2800.00, 8),
-(2, 'Mouse Logitech M170', 'Mouse inalámbrico USB', 'Accesorio', 60.00, 50),
-(2, 'Teclado Redragon Kumara', 'Teclado mecánico gamer', 'Accesorio', 180.00, 20),
-(3, 'SSD Kingston 480GB', 'Unidad de estado sólido', 'Componente', 230.00, 25),
-(3, 'Memoria RAM 8GB DDR4', 'Memoria para laptops y PCs', 'Componente', 150.00, 40),
-(4, 'Mantenimiento Preventivo', 'Limpieza y revisión general', 'Servicio', 120.00, 100),
-(4, 'Formateo e instalación de SO', 'Windows 11 o Linux', 'Servicio', 100.00, 100);
+INSERT INTO Usuario (DNI, Correo, Contrasena, Tipo_Usuario, Estado) VALUES
+(12345678, 'cliente1@email.com', '$2a$10$hashedpassword1', 'cliente', TRUE),
+(87654321, 'cliente2@email.com', '$2a$10$hashedpassword2', 'cliente', TRUE),
+(11223344, 'sulla@gmail.com', 'sulla123', 'empleado', TRUE),
+(44332211, 'flores@gmail.com', 'flores123', 'empleado', TRUE),
+(55667788, 'vilcahuaman@gmail.com', 'vilcahuaman123', 'cliente', TRUE);
 
 -- ======================================
--- Cliente
+-- INSERCIONES: Cliente
 -- ======================================
-INSERT INTO Cliente (DNI_Cliente, Nombre, Apellido, Direccion, Correo, Celular) VALUES
-(78945612, 'Carlos', 'Rojas', 'Av. Los Jardines 234', 'carlosr@gmail.com', '987654321'),
-(70321458, 'Lucía', 'Torres', 'Calle Central 102', 'luciat@gmail.com', '923456789'),
-(75632147, 'Miguel', 'Ramírez', 'Av. Industrial 589', 'miguelr@hotmail.com', '912345678'),
-(71258963, 'Ana', 'Sánchez', 'Jr. Grau 456', 'anas@gmail.com', '987321654');
+INSERT INTO Cliente (ID_Usuario, Nombre, Apellido, Direccion, Celular, Fecha_Nacimiento) VALUES
+(1, 'Juan', 'Pérez', 'Av. Principal 123', '999888777', '1990-05-15'),
+(2, 'María', 'Gómez', 'Calle Secundaria 456', '999777666', '1985-08-20'),
+(5, 'Carlos', 'López', 'Jr. Los Olivos 789', '999666555', '1992-12-10');
 
 -- ======================================
--- Empleado
+-- INSERCIONES: Empleado
 -- ======================================
-INSERT INTO Empleado (DNI_Empleado, Nombre, Apellido, Direccion, Correo, Celular, Cargo) VALUES
-(47896325, 'Jorge', 'Mendoza', 'Av. Lima 789', 'jorge.mendoza@empresa.com', '999888777', 'Administrador'),
-(48965231, 'Luis', 'Cáceres', 'Jr. San Martín 123', 'luis.caceres@empresa.com', '988776655', 'Vendedor'),
-(50231478, 'María', 'Huamán', 'Calle Primavera 456', 'maria.huaman@empresa.com', '977665544', 'Técnico');
+INSERT INTO Empleado (ID_Usuario, Nombre, Apellido, Direccion, Celular, Cargo, Salario, Fecha_Contratacion, Estado_Empleado) VALUES
+(3, 'Roberto', 'Silva', 'Av. Trabajador 321', '999555444', 'Vendedor', 2500.00, '2023-01-15', 'activo'),
+(4, 'Ana', 'Torres', 'Calle Empleado 654', '999444333', 'Técnico', 2800.00, '2022-06-01', 'activo');
 
 -- ======================================
--- Ventas
+-- INSERCIONES: Producto
 -- ======================================
-INSERT INTO Ventas (DNI_Cliente, DNI_Empleado, Metodo_Pago, Total) VALUES
-(78945612, 48965231, 'Tarjeta', 3380.00),
-(70321458, 48965231, 'Efectivo', 2430.00),
-(75632147, 48965231, 'Yape', 2800.00);
+INSERT INTO Producto (ID_Categoria, Nombre, Descripcion, Tipo_Producto, Precio, Stock, Estado) VALUES
+(1, 'Laptop HP Pavilion', 'Laptop 15.6 pulgadas, 8GB RAM', 'Laptop', 899.99, 10, TRUE),
+(1, 'Laptop Dell Inspiron', 'Laptop 14 pulgadas, 16GB RAM', 'Laptop', 1099.99, 8, TRUE),
+(2, 'Samsung Galaxy S23', 'Smartphone Android 128GB', 'Smartphone', 799.99, 15, TRUE),
+(2, 'iPhone 14', 'Smartphone Apple 128GB', 'Smartphone', 999.99, 12, TRUE),
+(4, 'Mouse Inalámbrico', 'Mouse ergonómico inalámbrico', 'Accesorio', 29.99, 50, TRUE),
+(4, 'Teclado Mecánico', 'Teclado gaming mecánico RGB', 'Accesorio', 89.99, 20, TRUE);
 
 -- ======================================
--- DetalleVenta
+-- INSERCIONES: Ventas
+-- ======================================
+INSERT INTO Ventas (ID_Cliente, ID_Empleado, Metodo_Pago, Total, Estado_Venta) VALUES
+(1, 3, 'tarjeta', 929.98, 'completada'),
+(2, 3, 'efectivo', 89.99, 'completada'),
+(5, 4, 'transferencia', 1799.98, 'completada');
+
+-- ======================================
+-- INSERCIONES: DetalleVenta
 -- ======================================
 INSERT INTO DetalleVenta (ID_Producto, ID_Ventas, Cantidad, Precio_Unitario, Subtotal) VALUES
-(1, 1, 1, 3200.00, 3200.00),
-(3, 1, 3, 60.00, 180.00),
-(5, 2, 1, 230.00, 230.00),
-(6, 2, 1, 150.00, 150.00),
-(8, 2, 1, 100.00, 100.00),
-(2, 3, 1, 2800.00, 2800.00);
+(3, 1, 1, 799.99, 799.99),
+(5, 1, 1, 29.99, 29.99),
+(6, 2, 1, 89.99, 89.99),
+(1, 3, 2, 899.99, 1799.98);
 
 -- ======================================
--- Cita_Tecnica
+-- INSERCIONES: Cita_Tecnica
 -- ======================================
-INSERT INTO Cita_Tecnica (DNI_Cliente, DNI_Empleado, Servicio, Estado, Descripcion, Fecha_Programada) VALUES
-(78945612, 50231478, 'Mantenimiento Preventivo', 'Pendiente', 'Cliente solicita limpieza y revisión del equipo HP', '2025-11-03 10:00:00'),
-(70321458, 50231478, 'Formateo e instalación de SO', 'Atendida', 'Se instaló Windows 11 Pro', '2025-10-25 15:00:00'),
-(71258963, 50231478, 'Revisión de hardware', 'Cancelada', 'Cliente canceló la cita', '2025-10-20 09:00:00');
+INSERT INTO Cita_Tecnica (ID_Cliente, ID_Empleado, Servicio, Estado, Descripcion, Fecha_Programada) VALUES
+(1, 4, 'Reparación de pantalla', 'pendiente', 'Pantalla rota, necesita reemplazo', '2024-01-15 10:00:00'),
+(2, 4, 'Mantenimiento preventivo', 'confirmada', 'Limpieza interna y actualización de software', '2024-01-16 14:30:00'),
+(5, 4, 'Instalación de software', 'completada', 'Instalación de Windows y Office', '2024-01-10 09:00:00');

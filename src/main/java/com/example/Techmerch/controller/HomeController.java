@@ -22,11 +22,6 @@ public class HomeController {
         return "public/contacto";
     }
 
-    @GetMapping("/login")
-    public String login() {
-        return "public/login/login";
-    }
-
     @GetMapping("/serviciotecnico")
     public String servicioTecnico() {
         return "public/serviciotecnico";
