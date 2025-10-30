@@ -11,7 +11,7 @@
   <div class="contenedor">
 
     <!-- Incluir la barra lateral -->
-    <jsp:include page="layout/sidebar.jsp" />
+    <jsp:include page="../layout/sidebar.jsp" />
 
     <!-- CONTENIDO PRINCIPAL -->
     <main class="contenido">

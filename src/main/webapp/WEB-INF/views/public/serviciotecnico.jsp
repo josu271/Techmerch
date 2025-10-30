@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<jsp:include page="layout/navbar.jsp" />
+<jsp:include page="../layout/navbar.jsp" />
 
 <!-- SECCIÓN PROMOCIONAL / MINI INICIO -->
 <section class="servicio-intro">

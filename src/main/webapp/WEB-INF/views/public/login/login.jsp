@@ -9,7 +9,7 @@
 </head>
 <body>
 
-<jsp:include page="layout/navbar.jsp" />
+<jsp:include page="../../layout/navbar.jsp" />
 
 <section class="login-section">
     <div class="login-container">

@@ -21,8 +21,8 @@
 <a href="${pageContext.request.contextPath}/ventas"><i class="bi bi-cart"></i> Ventas</a>
     <a href="${pageContext.request.contextPath}/articulo"><i class="bi bi-box-seam"></i> Productos</a>
 <a href="${pageContext.request.contextPath}/reporte"><i class="bi bi-file-earmark-bar-graph"></i> Reportes</a>
-    <a href="#"><i class="bi bi-tools"></i> Citas Técnicas</a>
-    <a href="#"><i class="bi bi-calendar-event"></i> Calendario</a>
-    <a href="#"><i class="bi bi-people"></i> Clientes</a>
+    <a href="${pageContext.request.contextPath}/citastecnica"><i class="bi bi-tools"></i> Citas Técnicas</a>
+    <a href="${pageContext.request.contextPath}/calendario"><i class="bi bi-calendar-event"></i> Calendario</a>
+    <a href="${pageContext.request.contextPath}/citastecnica"><i class="bi bi-people"></i> Clientes</a>
   </nav>
 </aside>

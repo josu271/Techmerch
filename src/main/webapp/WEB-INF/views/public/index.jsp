@@ -14,7 +14,7 @@
 </head>
 <body>
 
-  <%@ include file="layout/navbar.jsp" %>
+  <%@ include file="../layout/navbar.jsp" %>
 
   <!-- HERO -->
   <section class="hero">

@@ -12,7 +12,7 @@
 <body>
 
 <!-- INCLUIR NAVBAR -->
-<jsp:include page="layout/navbar.jsp" />
+<jsp:include page="../layout/navbar.jsp" />
 
 <section class="contacto-section">
     <h1>Contáctanos</h1>

@@ -10,7 +10,7 @@
 </head>
 <body>
 
-  <%@ include file="layout/navbar.jsp" %>
+  <%@ include file="../layout/navbar.jsp" %>
 
   <section class="productos">
     <h1>Nuestros Productos</h1>

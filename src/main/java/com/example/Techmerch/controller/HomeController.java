@@ -6,44 +6,94 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class HomeController {
 
+    // --- PÚBLICAS ---
     @GetMapping("/")
     public String home() {
-        return "index"; // busca en /WEB-INF/views/index.jsp
-
+        return "public/index";
     }
+
     @GetMapping("/productos")
     public String productos() {
-        return "productos"; // busca en /WEB-INF/views/productos.jsp
+        return "public/productos";
     }
+
     @GetMapping("/contacto")
     public String contacto() {
-        return "contacto"; // Busca en /WEB-INF/views/contacto.jsp
+        return "public/contacto";
     }
+
     @GetMapping("/login")
     public String login() {
-        return "login"; // Busca en /WEB-INF/views/contacto.jsp
+        return "public/login/login";
     }
+
     @GetMapping("/serviciotecnico")
-    public String serviciotecnico() {
-        return "serviciotecnico"; // Busca en /WEB-INF/views/contacto.jsp
+    public String servicioTecnico() {
+        return "public/serviciotecnico";
     }
+
+    // --- PRIVADAS ---
     @GetMapping("/panel")
     public String panel() {
-        return "panel"; // busca en /WEB-INF/views/panel.jsp
+        return "private/panel";
     }
-    @GetMapping("/ventas")
-    public String ventas() {
-        return "ventas"; // busca en /WEB-INF/views/ventas.jsp
-    }
+
+    // ---------- PRODUCTOS ----------
     @GetMapping("/articulo")
     public String articulo() {
-        return "articulo"; // busca en /WEB-INF/views/articulo.jsp
+        return "private/producto/articulo";
     }
+
+    @GetMapping("/articulo/agregar")
+    public String articuloAgregar() {
+        return "private/producto/articuloagregar";
+    }
+
+    @GetMapping("/articulo/editar")
+    public String articuloEditar() {
+        return "private/producto/articuloeditar";
+    }
+
+    // ---------- VENTAS ----------
+    @GetMapping("/ventas")
+    public String ventas() {
+        return "private/venta/ventas";
+    }
+
+    @GetMapping("/ventas/agregar")
+    public String ventasAgregar() {
+        return "private/venta/ventasagregar";
+    }
+
+    @GetMapping("/ventas/editar")
+    public String ventasEditar() {
+        return "private/venta/ventaseditar";
+    }
+
+    // ---------- CITAS TÉCNICAS ----------
+    @GetMapping("/citastecnica")
+    public String citasTecnica() {
+        return "private/citas_tecnica/citastecnica";
+    }
+
+    @GetMapping("/citastecnica/agregar")
+    public String citasTecnicaAgregar() {
+        return "private/citas_tecnica/citastecnicaagregar";
+    }
+
+    @GetMapping("/citastecnica/editar")
+    public String citasTecnicaEditar() {
+        return "private/citas_tecnica/citastecnicaeditar";
+    }
+
+    // ---------- CALENDARIO ----------
+    @GetMapping("/calendario")
+    public String calendario() {
+        return "private/calendario";
+    }
+
     @GetMapping("/reporte")
     public String reporte() {
-        return "reporte";
+        return "private/reporte";
     }
-
-
-
 }

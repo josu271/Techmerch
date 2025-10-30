@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="d-flex">
-    <%@ include file="layout/sidebar.jsp" %>
+    <%@ include file="../layout/sidebar.jsp" %>
 
     <!-- Contenido principal -->
     <div class="content p-4 w-100">
