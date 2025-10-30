@@ -28,9 +28,9 @@ public class UsuarioController {
             model.addAttribute("usuario", usuario);
 
             if (usuario.getTipoUsuario().equalsIgnoreCase("cliente")) {
-                return "redirect:/ventas";
+                return "redirect:/";
             } else if (usuario.getTipoUsuario().equalsIgnoreCase("empleado")) {
-                return "redirect:/empleado/dashboard";
+                return "redirect:/ventas";
             } else {
                 return "redirect:/login?error=tipoDesconocido";
             }

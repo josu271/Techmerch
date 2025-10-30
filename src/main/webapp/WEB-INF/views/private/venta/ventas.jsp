@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,22 +24,26 @@
                     <th>ID</th>
                     <th>Cliente</th>
                     <th>Empleado</th>
-                    <th>Fecha</th>
+                    <th>Método de Pago</th>
                     <th>Total</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Juan Pérez</td>
-                    <td>Admin</td>
-                    <td>2025-10-30</td>
-                    <td>1200.00</td>
-                    <td>
-                        <a href="${pageContext.request.contextPath}/ventas/editar" class="btn-edit">✏️ Editar</a>
-                    </td>
-                </tr>
+                <c:forEach var="v" items="${ventas}">
+                    <tr>
+                        <td>${v.idVenta}</td>  <!-- Ahora usa idVenta (minúsculas) -->
+                        <td>${v.idCliente}</td>
+                        <td>${v.idEmpleado}</td>
+                        <td>${v.metodoPago}</td>
+                        <td>S/. ${v.total}</td>
+                        <td>${v.estadoVenta}</td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/ventas/editar/${v.idVenta}" class="btn-edit">✏️ Editar</a>
+                        </td>
+                    </tr>
+                </c:forEach>
             </tbody>
         </table>
     </div>

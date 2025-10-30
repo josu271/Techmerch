@@ -50,15 +50,8 @@ public class HomeController {
     }
 
     // ---------- VENTAS ----------
-    @GetMapping("/ventas")
-    public String ventas() {
-        return "private/venta/ventas";
-    }
 
-    @GetMapping("/ventas/agregar")
-    public String ventasAgregar() {
-        return "private/venta/ventasagregar";
-    }
+
 
     @GetMapping("/ventas/editar")
     public String ventasEditar() {
