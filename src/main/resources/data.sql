@@ -68,3 +68,15 @@ INSERT INTO Cita_Tecnica (ID_Cliente, ID_Empleado, Servicio, Estado, Descripcion
 (1, 4, 'Reparación de pantalla', 'pendiente', 'Pantalla rota, necesita reemplazo', '2024-01-15 10:00:00'),
 (2, 4, 'Mantenimiento preventivo', 'confirmada', 'Limpieza interna y actualización de software', '2024-01-16 14:30:00'),
 (5, 4, 'Instalación de software', 'completada', 'Instalación de Windows y Office', '2024-01-10 09:00:00');
+
+INSERT INTO EMPLEADO (ID_USUARIO, NOMBRE, APELLIDO, DIRECCION, CELULAR, CARGO, SALARIO, FECHA_CONTRATACION, ESTADO_EMPLEADO)
+VALUES (1, 'Juan', 'Pérez', 'Av. Principal 123', '999111222', 'Gerente', 5000.00, '2021-03-10', 'activo');
+
+INSERT INTO EMPLEADO (ID_USUARIO, NOMBRE, APELLIDO, DIRECCION, CELULAR, CARGO, SALARIO, FECHA_CONTRATACION, ESTADO_EMPLEADO)
+VALUES (2, 'Maria', 'Gomez', 'Jr. Los Andes 456', '999222333', 'Analista', 3500.00, '2022-09-20', 'activo');
+
+INSERT INTO CLIENTE (ID_USUARIO, NOMBRE, APELLIDO, DIRECCION, CELULAR, FECHA_NACIMIENTO)
+VALUES (3, 'Roberto', 'Silva', 'Av. Trabajador 321', '999555444', '1987-04-22');
+
+INSERT INTO CLIENTE (ID_USUARIO, NOMBRE, APELLIDO, DIRECCION, CELULAR, FECHA_NACIMIENTO)
+VALUES (4, 'Ana', 'Torres', 'Calle Empleado 654', '999444333', '1993-10-15');

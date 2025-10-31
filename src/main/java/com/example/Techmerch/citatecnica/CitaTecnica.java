@@ -13,82 +13,38 @@ public class CitaTecnica {
     private Timestamp fechaProgramada;
     private Timestamp fechaCreacion;
 
-    public CitaTecnica() {
-    }
+    // --- Atributos adicionales opcionales (para mostrar nombres) ---
+    private String nombreCliente;
+    private String nombreEmpleado;
 
-    public CitaTecnica(Integer idCitaTecnica, Integer idCliente, Integer idEmpleado, String servicio,
-                       String estado, String descripcion, Timestamp fechaProgramada, Timestamp fechaCreacion) {
-        this.idCitaTecnica = idCitaTecnica;
-        this.idCliente = idCliente;
-        this.idEmpleado = idEmpleado;
-        this.servicio = servicio;
-        this.estado = estado;
-        this.descripcion = descripcion;
-        this.fechaProgramada = fechaProgramada;
-        this.fechaCreacion = fechaCreacion;
-    }
+    // --- Getters y Setters ---
+    public Integer getIdCitaTecnica() { return idCitaTecnica; }
+    public void setIdCitaTecnica(Integer idCitaTecnica) { this.idCitaTecnica = idCitaTecnica; }
 
-    public Integer getIdCitaTecnica() {
-        return idCitaTecnica;
-    }
+    public Integer getIdCliente() { return idCliente; }
+    public void setIdCliente(Integer idCliente) { this.idCliente = idCliente; }
 
-    public void setIdCitaTecnica(Integer idCitaTecnica) {
-        this.idCitaTecnica = idCitaTecnica;
-    }
+    public Integer getIdEmpleado() { return idEmpleado; }
+    public void setIdEmpleado(Integer idEmpleado) { this.idEmpleado = idEmpleado; }
 
-    public Integer getIdCliente() {
-        return idCliente;
-    }
+    public String getServicio() { return servicio; }
+    public void setServicio(String servicio) { this.servicio = servicio; }
 
-    public void setIdCliente(Integer idCliente) {
-        this.idCliente = idCliente;
-    }
+    public String getEstado() { return estado; }
+    public void setEstado(String estado) { this.estado = estado; }
 
-    public Integer getIdEmpleado() {
-        return idEmpleado;
-    }
+    public String getDescripcion() { return descripcion; }
+    public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
-    public void setIdEmpleado(Integer idEmpleado) {
-        this.idEmpleado = idEmpleado;
-    }
+    public Timestamp getFechaProgramada() { return fechaProgramada; }
+    public void setFechaProgramada(Timestamp fechaProgramada) { this.fechaProgramada = fechaProgramada; }
 
-    public String getServicio() {
-        return servicio;
-    }
+    public Timestamp getFechaCreacion() { return fechaCreacion; }
+    public void setFechaCreacion(Timestamp fechaCreacion) { this.fechaCreacion = fechaCreacion; }
 
-    public void setServicio(String servicio) {
-        this.servicio = servicio;
-    }
+    public String getNombreCliente() { return nombreCliente; }
+    public void setNombreCliente(String nombreCliente) { this.nombreCliente = nombreCliente; }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
-    public Timestamp getFechaProgramada() {
-        return fechaProgramada;
-    }
-
-    public void setFechaProgramada(Timestamp fechaProgramada) {
-        this.fechaProgramada = fechaProgramada;
-    }
-
-    public Timestamp getFechaCreacion() {
-        return fechaCreacion;
-    }
-
-    public void setFechaCreacion(Timestamp fechaCreacion) {
-        this.fechaCreacion = fechaCreacion;
-    }
+    public String getNombreEmpleado() { return nombreEmpleado; }
+    public void setNombreEmpleado(String nombreEmpleado) { this.nombreEmpleado = nombreEmpleado; }
 }
