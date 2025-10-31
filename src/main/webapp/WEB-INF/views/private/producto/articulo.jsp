@@ -1,4 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,22 +26,57 @@
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Categoría</th>
+                    <th>Descripción</th>
+                    <th>Tipo</th>
                     <th>Precio</th>
                     <th>Stock</th>
+                    <th>Estado</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>PC Gamer</td>
-                    <td>Computadora</td>
-                    <td>3500.00</td>
-                    <td>10</td>
-                    <td>
-                        <a href="${pageContext.request.contextPath}/articulo/editar" class="btn-edit">✏️ Editar</a>
-                    </td>
-                </tr>
+                <c:forEach var="producto" items="${productos}">
+                    <tr>
+                        <td>${producto.ID_Producto}</td>
+                        <td>${producto.Nombre}</td>
+                        <td>${producto.CategoriaNombre}</td>
+                        <td>${producto.Descripcion}</td>
+                        <td>${producto.Tipo_Producto}</td>
+                        <td>S/. ${producto.Precio}</td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${producto.Stock < 10}">
+                                    <span class="stock-low">${producto.Stock}</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="stock-normal">${producto.Stock}</span>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                        <td>
+                            <c:choose>
+                                <c:when test="${producto.Estado}">
+                                    <span class="badge bg-success">Activo</span>
+                                </c:when>
+                                <c:otherwise>
+                                    <span class="badge bg-secondary">Inactivo</span>
+                                </c:otherwise>
+                            </c:choose>
+                        </td>
+                        <td>
+                            <a href="${pageContext.request.contextPath}/articulo/editar/${producto.ID_Producto}" class="btn-edit">✏️ Editar</a>
+                        </td>
+                    </tr>
+                </c:forEach>
+
+                <%-- Mensaje si no hay productos --%>
+                <c:if test="${empty productos}">
+                    <tr>
+                        <td colspan="9" style="text-align: center; padding: 2rem;">
+                            No hay productos registrados
+                        </td>
+                    </tr>
+                </c:if>
             </tbody>
         </table>
     </div>
