@@ -1,101 +1,104 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <title>Reportes - TiendaTech</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/resources/css/reporte.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sidebar.css">
+
 </head>
-<body>
-<div class="d-flex">
-    <%@ include file="../layout/sidebar.jsp" %>
+<body class="bg-light">
+<div class="contenedor">
+<%@ include file="../layout/sidebar.jsp" %>
 
-    <!-- Contenido principal -->
-    <div class="content p-4 w-100">
-        <h2 class="mb-4"><i class="bi bi-bar-chart"></i> Reportes</h2>
+<div class="container py-4">
+    <h2 class="mb-4 text-center"><i class="bi bi-bar-chart"></i> Reportes de Ventas</h2>
 
-        <!-- Resumen rápido -->
-        <div class="row mb-4">
-            <div class="col-md-4">
-                <div class="card text-center shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Ventas del Mes</h5>
-                        <p class="fs-4 text-primary">$12,540</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-center shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Productos Vendidos</h5>
-                        <p class="fs-4 text-success">320</p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card text-center shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Clientes Nuevos</h5>
-                        <p class="fs-4 text-warning">25</p>
-                    </div>
+    <div class="row">
+        <!-- 📊 Ventas por producto -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Ventas por Producto (Top 10)</h5>
+                    <canvas id="productoChart"></canvas>
                 </div>
             </div>
         </div>
 
-        <!-- Gráficos -->
-        <div class="row">
-            <div class="col-md-6 mb-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Ventas Semanales</h5>
-                        <canvas id="ventasChart"></canvas>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 mb-4">
-                <div class="card shadow-sm">
-                    <div class="card-body">
-                        <h5 class="card-title">Categorías Más Vendidas</h5>
-                        <canvas id="categoriasChart"></canvas>
-                    </div>
+        <!-- 📈 Ventas diarias -->
+        <div class="col-md-6 mb-4">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <h5 class="card-title">Evolución de Ventas Diarias</h5>
+                    <canvas id="lineChart"></canvas>
                 </div>
             </div>
         </div>
+    </div>
 
+    <!-- 🍩 Top productos por categoría -->
+    <div class="card shadow-sm mb-4">
+        <div class="card-body">
+            <h5 class="card-title">Top 10 Productos por Categoría</h5>
+            <canvas id="categoriaChart"></canvas>
+        </div>
     </div>
 </div>
 
 <script>
-    // Gráfico de ventas
-    new Chart(document.getElementById('ventasChart'), {
-        type: 'line',
+    // 📊 Ventas por producto
+    const productos = [<c:forEach var="r" items="${ventasPorProducto}">"${r.nombre}",</c:forEach>];
+    const totales = [<c:forEach var="r" items="${ventasPorProducto}">${r.total},</c:forEach>];
+
+    new Chart(document.getElementById('productoChart'), {
+        type: 'bar',
         data: {
-            labels: ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'],
+            labels: productos,
             datasets: [{
                 label: 'Ventas ($)',
-                data: [1200, 1500, 1000, 1800, 2000, 2200, 1700],
-                borderColor: '#1e40af',
-                backgroundColor: 'rgba(30, 64, 175, 0.2)',
+                data: totales,
+                backgroundColor: '#2563eb'
+            }]
+        }
+    });
+
+    // 📈 Ventas semanales
+    const fechas = [<c:forEach var="r" items="${ventasSemanales}">"${r.fecha}",</c:forEach>];
+    const montos = [<c:forEach var="r" items="${ventasSemanales}">${r.total},</c:forEach>];
+
+    new Chart(document.getElementById('lineChart'), {
+        type: 'line',
+        data: {
+            labels: fechas,
+            datasets: [{
+                label: 'Total de Ventas ($)',
+                data: montos,
+                borderColor: '#16a34a',
                 fill: true,
                 tension: 0.3
             }]
         }
     });
 
-    // Gráfico de categorías
-    new Chart(document.getElementById('categoriasChart'), {
+    // 🍩 Top por categoría
+    const categorias = [<c:forEach var="r" items="${topPorCategoria}">"${r.producto}",</c:forEach>];
+    const cantidades = [<c:forEach var="r" items="${topPorCategoria}">${r.total},</c:forEach>];
+
+    new Chart(document.getElementById('categoriaChart'), {
         type: 'doughnut',
         data: {
-            labels: ['Computadoras', 'Accesorios', 'Celulares', 'Otros'],
+            labels: categorias,
             datasets: [{
-                data: [40, 30, 20, 10],
-                backgroundColor: ['#1e3a8a', '#16a34a', '#f59e0b', '#6b7280']
+                data: cantidades,
+                backgroundColor: ['#2563eb','#16a34a','#f59e0b','#dc2626','#9333ea','#0891b2']
             }]
         }
     });
 </script>
+<div
 </body>
 </html>
