@@ -42,7 +42,7 @@ public class UsuarioDAOImpl implements UsuarioDAO {
 
     @Override
     public void actualizarUltimoLogin(int idUsuario) {
-        String sql = "UPDATE Usuario SET Ultimo_Login = NOW() WHERE ID_Usuario = ?";
-        jdbcTemplate.update(sql, idUsuario);
+        jdbcTemplate.update("UPDATE Usuario SET Ultimo_Login = CURRENT_TIMESTAMP WHERE ID_Usuario = ?", idUsuario);
     }
+
 }

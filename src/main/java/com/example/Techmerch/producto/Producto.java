@@ -10,14 +10,15 @@ public class Producto {
     private String tipoProducto;
     private BigDecimal precio;
     private Integer stock;
-    private Boolean estado;
+    private Integer estado; // <- correcto
 
-    // Constructores
+    // Constructor vacío
     public Producto() {}
 
+    // Constructor completo
     public Producto(Integer idProducto, Integer idCategoria, String nombre,
                     String descripcion, String tipoProducto, BigDecimal precio,
-                    Integer stock, Boolean estado) {
+                    Integer stock, Integer estado) { // <- cambiado a Integer
         this.idProducto = idProducto;
         this.idCategoria = idCategoria;
         this.nombre = nombre;
@@ -50,6 +51,6 @@ public class Producto {
     public Integer getStock() { return stock; }
     public void setStock(Integer stock) { this.stock = stock; }
 
-    public Boolean getEstado() { return estado; }
-    public void setEstado(Boolean estado) { this.estado = estado; }
+    public Integer getEstado() { return estado; } // <- cambiado a Integer
+    public void setEstado(Integer estado) { this.estado = estado; } // <- cambiado a Integer
 }

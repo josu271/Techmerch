@@ -37,25 +37,26 @@
             <tbody>
                 <c:forEach var="producto" items="${productos}">
                     <tr>
-                        <td>${producto.ID_Producto}</td>
-                        <td>${producto.Nombre}</td>
-                        <td>${producto.CategoriaNombre}</td>
-                        <td>${producto.Descripcion}</td>
-                        <td>${producto.Tipo_Producto}</td>
-                        <td>S/. ${producto.Precio}</td>
+                        <td>${producto.idProducto}</td>
+                        <td>${producto.nombre}</td>
+                        <td>${producto.categoriaNombre}</td>
+                        <td>${producto.descripcion}</td>
+                        <td>${producto.tipoProducto}</td>
+                        <td>S/. ${producto.precio}</td>
                         <td>
                             <c:choose>
-                                <c:when test="${producto.Stock < 10}">
-                                    <span class="stock-low">${producto.Stock}</span>
+                                <c:when test="${producto.stock < 10}">
+                                    <span class="stock-low">${producto.stock}</span>
                                 </c:when>
                                 <c:otherwise>
-                                    <span class="stock-normal">${producto.Stock}</span>
+                                    <span class="stock-normal">${producto.stock}</span>
                                 </c:otherwise>
                             </c:choose>
                         </td>
                         <td>
                             <c:choose>
-                                <c:when test="${producto.Estado}">
+                                <c:when test="${producto.estado == 1}">
+
                                     <span class="badge bg-success">Activo</span>
                                 </c:when>
                                 <c:otherwise>
@@ -63,8 +64,10 @@
                                 </c:otherwise>
                             </c:choose>
                         </td>
+
+
                         <td>
-                            <a href="${pageContext.request.contextPath}/articulo/editar/${producto.ID_Producto}" class="btn-edit">✏️ Editar</a>
+                            <a href="${pageContext.request.contextPath}/articulo/editar/${producto.idProducto}" class="btn-edit">✏️ Editar</a>
                         </td>
                     </tr>
                 </c:forEach>

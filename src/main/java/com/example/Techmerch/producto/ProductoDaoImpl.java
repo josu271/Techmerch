@@ -18,6 +18,7 @@ public class ProductoDaoImpl implements ProductoDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
+    // ✅ Mapea columnas SQLite → atributos del modelo
     private static final class ProductoRowMapper implements RowMapper<Producto> {
         @Override
         public Producto mapRow(ResultSet rs, int rowNum) throws SQLException {
@@ -29,14 +30,14 @@ public class ProductoDaoImpl implements ProductoDAO {
             producto.setTipoProducto(rs.getString("Tipo_Producto"));
             producto.setPrecio(rs.getBigDecimal("Precio"));
             producto.setStock(rs.getInt("Stock"));
-            producto.setEstado(rs.getBoolean("Estado"));
+            producto.setEstado(rs.getInt("Estado")); // <- Integer directo (1 o 0)
             return producto;
         }
     }
 
     @Override
     public List<Producto> listarProductos() {
-        String sql = "SELECT * FROM Producto WHERE Estado = true";
+        String sql = "SELECT * FROM Producto WHERE Estado = 1";
         return jdbcTemplate.query(sql, new ProductoRowMapper());
     }
 
@@ -48,8 +49,11 @@ public class ProductoDaoImpl implements ProductoDAO {
 
     @Override
     public void crearProducto(Producto producto) {
-        String sql = "INSERT INTO Producto (ID_Categoria, Nombre, Descripcion, Tipo_Producto, Precio, Stock, Estado) " +
-                "VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = """
+            INSERT INTO Producto 
+            (ID_Categoria, Nombre, Descripcion, Tipo_Producto, Precio, Stock, Estado)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+            """;
         jdbcTemplate.update(sql,
                 producto.getIdCategoria(),
                 producto.getNombre(),
@@ -57,13 +61,18 @@ public class ProductoDaoImpl implements ProductoDAO {
                 producto.getTipoProducto(),
                 producto.getPrecio(),
                 producto.getStock(),
-                producto.getEstado());
+                producto.getEstado() != null ? producto.getEstado() : 1 // por defecto activo
+        );
     }
 
     @Override
     public void actualizarProducto(Producto producto) {
-        String sql = "UPDATE Producto SET ID_Categoria = ?, Nombre = ?, Descripcion = ?, " +
-                "Tipo_Producto = ?, Precio = ?, Stock = ?, Estado = ? WHERE ID_Producto = ?";
+        String sql = """
+            UPDATE Producto 
+            SET ID_Categoria = ?, Nombre = ?, Descripcion = ?, 
+                Tipo_Producto = ?, Precio = ?, Stock = ?, Estado = ?
+            WHERE ID_Producto = ?
+            """;
         jdbcTemplate.update(sql,
                 producto.getIdCategoria(),
                 producto.getNombre(),
@@ -72,18 +81,20 @@ public class ProductoDaoImpl implements ProductoDAO {
                 producto.getPrecio(),
                 producto.getStock(),
                 producto.getEstado(),
-                producto.getIdProducto());
+                producto.getIdProducto()
+        );
     }
 
     @Override
     public void eliminarProducto(int id) {
-        String sql = "UPDATE Producto SET Estado = false WHERE ID_Producto = ?";
+        // Baja lógica: marcar como inactivo
+        String sql = "UPDATE Producto SET Estado = 0 WHERE ID_Producto = ?";
         jdbcTemplate.update(sql, id);
     }
 
     @Override
     public List<Producto> listarProductosPorCategoria(int idCategoria) {
-        String sql = "SELECT * FROM Producto WHERE ID_Categoria = ? AND Estado = true";
+        String sql = "SELECT * FROM Producto WHERE ID_Categoria = ? AND Estado = 1";
         return jdbcTemplate.query(sql, new ProductoRowMapper(), idCategoria);
     }
 }
