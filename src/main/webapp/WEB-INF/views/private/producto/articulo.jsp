@@ -67,7 +67,7 @@
 
 
                         <td>
-                            <a href="${pageContext.request.contextPath}/articulo/editar/${producto.idProducto}" class="btn-edit">✏️ Editar</a>
+                            <a href="${pageContext.request.contextPath}/articulo/editar/${producto.ID_Producto}" class="btn-edit">✏️ Editar</a>
                         </td>
                     </tr>
                 </c:forEach>

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @Controller
+@RequestMapping("/articulo")
 public class ProductoControllerHTML {
 
     private final JdbcTemplate jdbcTemplate;
@@ -19,7 +20,7 @@ public class ProductoControllerHTML {
     }
 
     // ✅ LISTAR PRODUCTOS
-    @GetMapping("/articulo")
+    @GetMapping
     public String listarProductos(Model model) {
         List<Map<String, Object>> productos = jdbcTemplate.queryForList(
                 "SELECT p.*, c.Nombre AS CategoriaNombre " +
@@ -28,21 +29,21 @@ public class ProductoControllerHTML {
                         "WHERE p.Estado = 1"
         );
         model.addAttribute("productos", productos);
-        return "private/producto/articulo"; // archivo JSP
+        return "private/producto/articulo"; // JSP: /WEB-INF/views/private/producto/articulo.jsp
     }
 
     // ✅ MOSTRAR FORMULARIO DE AGREGAR
-    @GetMapping("/articulo/agregar")
+    @GetMapping("/agregar")
     public String mostrarFormularioAgregar(Model model) {
         List<Map<String, Object>> categorias = jdbcTemplate.queryForList(
                 "SELECT * FROM Categorias WHERE Estado = 1"
         );
         model.addAttribute("categorias", categorias);
-        return "private/producto/articuloagregar"; // archivo JSP
+        return "private/producto/articuloagregar"; // JSP: /WEB-INF/views/private/producto/articuloagregar.jsp
     }
 
-    // ✅ GUARDAR NUEVO PRODUCTO (desde formulario JSP)
-    @PostMapping("/articulo/guardar")
+    // ✅ GUARDAR NUEVO PRODUCTO
+    @PostMapping("/guardar")
     public String guardarProducto(
             @RequestParam("idCategoria") int idCategoria,
             @RequestParam("nombre") String nombre,
@@ -60,7 +61,7 @@ public class ProductoControllerHTML {
     }
 
     // ✅ MOSTRAR FORMULARIO DE EDICIÓN
-    @GetMapping("/articulo/editar/{id}")
+    @GetMapping("/editar/{id}")
     public String mostrarFormularioEditar(@PathVariable int id, Model model) {
         Map<String, Object> producto = jdbcTemplate.queryForMap(
                 "SELECT * FROM Producto WHERE ID_Producto = ?", id
@@ -71,11 +72,11 @@ public class ProductoControllerHTML {
 
         model.addAttribute("producto", producto);
         model.addAttribute("categorias", categorias);
-        return "private/producto/articuloeditar";
+        return "private/producto/articuloeditar"; // JSP: /WEB-INF/views/private/producto/articuloeditar.jsp
     }
 
-    // ✅ ACTUALIZAR PRODUCTO EXISTENTE
-    @PostMapping("/articulo/actualizar")
+    // ✅ ACTUALIZAR PRODUCTO
+    @PostMapping("/actualizar")
     public String actualizarProducto(
             @RequestParam("idProducto") int idProducto,
             @RequestParam("idCategoria") int idCategoria,
@@ -86,9 +87,17 @@ public class ProductoControllerHTML {
             @RequestParam("stock") int stock
     ) {
         jdbcTemplate.update(
-                "UPDATE Producto SET ID_Categoria=?, Nombre=?, Descripcion=?, Tipo_Producto=?, Precio=?, Stock=? WHERE ID_Producto=?",
+                "UPDATE Producto SET ID_Categoria=?, Nombre=?, Descripcion=?, Tipo_Producto=?, Precio=?, Stock=? " +
+                        "WHERE ID_Producto=?",
                 idCategoria, nombre, descripcion, tipoProducto, precio, stock, idProducto
         );
+        return "redirect:/articulo";
+    }
+
+    // ✅ ELIMINAR PRODUCTO
+    @GetMapping("/eliminar/{id}")
+    public String eliminarProducto(@PathVariable int id) {
+        jdbcTemplate.update("UPDATE Producto SET Estado = 0 WHERE ID_Producto = ?", id);
         return "redirect:/articulo";
     }
 }

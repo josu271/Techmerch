@@ -17,8 +17,9 @@
     <div class="contenido">
         <h1>Editar Producto</h1>
 
-        <form action="${pageContext.request.contextPath}/api/productos/${producto.ID_Producto}" method="POST" class="product-form">
-            <input type="hidden" name="_method" value="PUT">
+        <form action="${pageContext.request.contextPath}/articulo/actualizar" method="post">
+            <input type="hidden" name="idProducto" value="${producto.ID_Producto}">
+
 
             <div class="form-group">
                 <label for="nombre">Nombre del Producto:</label>
@@ -36,10 +37,14 @@
                 <select id="idCategoria" name="idCategoria" class="form-control" required>
                     <option value="">Seleccione una categoría</option>
                     <c:forEach var="categoria" items="${categorias}">
-                        <option value="${categoria.ID_Categoria}"
-                                ${categoria.ID_Categoria == producto.ID_Categoria ? 'selected' : ''}>
-                            ${categoria.Nombre}
-                        </option>
+                        <c:choose>
+                            <c:when test="${categoria.ID_Categoria == producto.ID_Categoria}">
+                                <option value="${categoria.ID_Categoria}" selected>${categoria.Nombre}</option>
+                            </c:when>
+                            <c:otherwise>
+                                <option value="${categoria.ID_Categoria}">${categoria.Nombre}</option>
+                            </c:otherwise>
+                        </c:choose>
                     </c:forEach>
                 </select>
             </div>
@@ -65,8 +70,16 @@
             <div class="form-group">
                 <label for="estado">Estado:</label>
                 <select id="estado" name="estado" class="form-control">
-                    <option value="true" ${producto.Estado ? 'selected' : ''}>Activo</option>
-                    <option value="false" ${!producto.Estado ? 'selected' : ''}>Inactivo</option>
+                    <c:choose>
+                        <c:when test="${producto.Estado == 1}">
+                            <option value="1" selected>Activo</option>
+                            <option value="0">Inactivo</option>
+                        </c:when>
+                        <c:otherwise>
+                            <option value="1">Activo</option>
+                            <option value="0" selected>Inactivo</option>
+                        </c:otherwise>
+                    </c:choose>
                 </select>
             </div>
 
