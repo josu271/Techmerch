@@ -1,59 +1,111 @@
-/* FORM VENTA */
-.form-venta {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 8px;
-  margin-bottom: 2rem;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+/* Estilos para formularios sin JavaScript */
+.form-section {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-.form-venta h3 {
-  margin-bottom: 1rem;
-  color: #1e40af;
+.form-section h4 {
+    color: #1a1a2e;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e9ecef;
 }
 
-.form-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 1rem 2rem;
-  margin-bottom: 1rem;
+.form-actions {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 2px solid #e9ecef;
 }
 
-.form-grid label {
-  display: block;
-  margin-bottom: 5px;
-  font-weight: 600;
+/* Mejoras para la tabla de productos */
+.data-table input[type="checkbox"] {
+    transform: scale(1.2);
 }
 
-.form-grid input {
-  width: 100%;
-  padding: 8px;
-  border: 1px solid #ddd;
-  border-radius: 6px;
+.data-table input[type="number"] {
+    text-align: center;
+    width: 80px;
 }
 
-.btn-registrar {
-  background: #16a34a;
-  color: white;
-  border: none;
-  padding: 10px 15px;
-  border-radius: 6px;
-  cursor: pointer;
-  transition: 0.3s;
+/* Estados de stock */
+.text-success {
+    color: #28a745 !important;
+    font-weight: bold;
 }
 
-.btn-registrar:hover {
-  background: #15803d;
+.text-danger {
+    color: #dc3545 !important;
+    font-weight: bold;
 }
 
-/* BOTONES TABLA */
-.btn-editar, .btn-eliminar {
-  border: none;
-  background: transparent;
-  cursor: pointer;
-  font-size: 1.2rem;
-  margin: 0 5px;
+.text-muted {
+    color: #6c757d !important;
+    font-style: italic;
 }
 
-.btn-editar { color: #1e40af; }
-.btn-eliminar { color: #dc2626; }
+/* Alertas */
+.alert {
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+}
+
+.alert-warning {
+    background-color: #fff3cd;
+    border-color: #ffeaa7;
+    color: #856404;
+}
+
+.alert-link {
+    font-weight: bold;
+}
+
+/* Filtro de productos */
+#filtroProducto {
+    margin-bottom: 1rem;
+}
+
+/* Resumen de productos seleccionados */
+.resumen-productos {
+    background: #f8f9fa;
+    padding: 1rem;
+    border-radius: 8px;
+}
+
+.resumen-lista {
+    min-height: 50px;
+}
+
+.producto-seleccionado {
+    background: #e9ecef;
+    padding: 0.5rem;
+    margin: 0.25rem 0;
+    border-radius: 4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .data-table {
+        font-size: 0.8rem;
+    }
+
+    .data-table th,
+    .data-table td {
+        padding: 0.5rem;
+    }
+
+    .cantidad-input {
+        width: 60px !important;
+    }
+}
