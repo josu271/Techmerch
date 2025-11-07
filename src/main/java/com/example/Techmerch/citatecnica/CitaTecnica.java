@@ -10,7 +10,9 @@ public class CitaTecnica {
     private String servicio;
     private String estado;
     private String descripcion;
-    private Timestamp fechaProgramada;
+
+    // Usar String para recibir del formulario
+    private String fechaProgramada;
     private Timestamp fechaCreacion;
 
     // --- Atributos adicionales opcionales (para mostrar nombres) ---
@@ -36,8 +38,9 @@ public class CitaTecnica {
     public String getDescripcion() { return descripcion; }
     public void setDescripcion(String descripcion) { this.descripcion = descripcion; }
 
-    public Timestamp getFechaProgramada() { return fechaProgramada; }
-    public void setFechaProgramada(Timestamp fechaProgramada) { this.fechaProgramada = fechaProgramada; }
+    // Getter y Setter para String
+    public String getFechaProgramada() { return fechaProgramada; }
+    public void setFechaProgramada(String fechaProgramada) { this.fechaProgramada = fechaProgramada; }
 
     public Timestamp getFechaCreacion() { return fechaCreacion; }
     public void setFechaCreacion(Timestamp fechaCreacion) { this.fechaCreacion = fechaCreacion; }
@@ -47,4 +50,28 @@ public class CitaTecnica {
 
     public String getNombreEmpleado() { return nombreEmpleado; }
     public void setNombreEmpleado(String nombreEmpleado) { this.nombreEmpleado = nombreEmpleado; }
+
+    // Método auxiliar para convertir a Timestamp (para la base de datos)
+    public Timestamp getFechaProgramadaAsTimestamp() {
+        if (fechaProgramada != null && !fechaProgramada.isEmpty()) {
+            try {
+                // Convertir de "yyyy-MM-ddTHH:mm" a Timestamp
+                String fechaSQL = fechaProgramada.replace('T', ' ') + ":00";
+                return Timestamp.valueOf(fechaSQL);
+            } catch (Exception e) {
+                System.err.println("Error convirtiendo fecha: " + fechaProgramada);
+                return null;
+            }
+        }
+        return null;
+    }
+
+    // Método para formatear fecha para el input datetime-local
+    public String getFechaProgramadaFormatted() {
+        if (fechaProgramada != null && !fechaProgramada.isEmpty()) {
+            return fechaProgramada;
+        }
+        return "";
+    }
+
 }

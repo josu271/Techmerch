@@ -1,14 +1,14 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
     <title>Citas Técnicas</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/sidebar.css">
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/citastecnica.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/citastecn.css">
 </head>
 <body>
 
@@ -16,10 +16,17 @@
     <%@ include file="../../layout/sidebar.jsp" %>
 
     <div class="contenido">
-        <h1>Citas Técnicas</h1>
-        <a href="${pageContext.request.contextPath}/citastecnica/agregar" class="btn btn-primary mb-3">
-            <i class="bi bi-plus-circle"></i> Nueva Cita
+        <h1><i class="bi bi-tools me-2"></i>Citas Técnicas</h1>
+        <a href="${pageContext.request.contextPath}/citastecnica/agregar" class="btn btn-primary mb-4">
+            <i class="bi bi-plus-circle me-2"></i> Nueva Cita
         </a>
+
+        <c:if test="${not empty message}">
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                ${message}
+                <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+        </c:if>
 
         <div class="table-responsive">
             <table class="table table-striped table-hover">
@@ -38,15 +45,16 @@
                     <c:choose>
                         <c:when test="${empty citas}">
                             <tr>
-                                <td colspan="7" class="text-center text-muted py-4">
-                                    <i class="bi bi-inbox"></i> No hay citas técnicas registradas
+                                <td colspan="7" class="text-center text-muted py-5">
+                                    <i class="bi bi-inbox display-4 d-block mb-3"></i>
+                                    No hay citas técnicas registradas
                                 </td>
                             </tr>
                         </c:when>
                         <c:otherwise>
                             <c:forEach var="cita" items="${citas}">
                                 <tr>
-                                    <td>${cita.idCitaTecnica}</td>
+                                    <td class="fw-bold">${cita.idCitaTecnica}</td>
                                     <td>${cita.nombreCliente}</td>
                                     <td>${cita.nombreEmpleado}</td>
                                     <td>${cita.servicio}</td>
@@ -73,7 +81,23 @@
                                         </c:choose>
                                     </td>
                                     <td>
-                                        <fmt:formatDate value="${cita.fechaProgramada}" pattern="dd/MM/yyyy HH:mm"/>
+                                        <!-- Formato más robusto para manejar diferentes formatos de fecha -->
+                                        <c:choose>
+                                            <c:when test="${fn:contains(cita.fechaProgramada, 'T')}">
+                                                <!-- Formato con T: yyyy-MM-ddTHH:mm -->
+                                                <fmt:parseDate value="${cita.fechaProgramada}" pattern="yyyy-MM-dd'T'HH:mm" var="fechaParseada" />
+                                                <fmt:formatDate value="${fechaParseada}" pattern="dd/MM/yyyy HH:mm" />
+                                            </c:when>
+                                            <c:when test="${fn:contains(cita.fechaProgramada, ' ')}">
+                                                <!-- Formato con espacio: yyyy-MM-dd HH:mm:ss -->
+                                                <fmt:parseDate value="${cita.fechaProgramada}" pattern="yyyy-MM-dd HH:mm:ss" var="fechaParseada" />
+                                                <fmt:formatDate value="${fechaParseada}" pattern="dd/MM/yyyy HH:mm" />
+                                            </c:when>
+                                            <c:otherwise>
+                                                <!-- Si no coincide con ningún formato conocido, mostrar tal cual -->
+                                                ${cita.fechaProgramada}
+                                            </c:otherwise>
+                                        </c:choose>
                                     </td>
                                     <td>
                                         <div class="btn-group" role="group">

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Repository;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.util.List;
 
 @Repository
@@ -25,10 +26,20 @@ public class CitaTecnicaDAOImpl implements CitaTecnicaDAO {
             c.setServicio(rs.getString("Servicio"));
             c.setEstado(rs.getString("Estado"));
             c.setDescripcion(rs.getString("Descripcion"));
-            c.setFechaProgramada(rs.getTimestamp("Fecha_Programada"));
-            c.setFechaCreacion(rs.getTimestamp("Fecha_Creacion"));
 
-            // Para H2 usar CONCAT en lugar de ||
+            // Obtener fecha como String directamente SIN convertir
+            String fechaProgramadaStr = rs.getString("Fecha_Programada");
+            c.setFechaProgramada(fechaProgramadaStr); // Guardar el string original
+
+            String fechaCreacionStr = rs.getString("Fecha_Creacion");
+            if (fechaCreacionStr != null) {
+                try {
+                    c.setFechaCreacion(Timestamp.valueOf(fechaCreacionStr));
+                } catch (Exception e) {
+                    System.err.println("Error parsing creation date: " + fechaCreacionStr);
+                }
+            }
+
             c.setNombreCliente(rs.getString("nombreCliente"));
             c.setNombreEmpleado(rs.getString("nombreEmpleado"));
             return c;
@@ -37,27 +48,44 @@ public class CitaTecnicaDAOImpl implements CitaTecnicaDAO {
 
     @Override
     public List<CitaTecnica> listarTodas() {
+        // Primero, contar cuántas citas hay en total
+        String countSql = "SELECT COUNT(*) FROM Cita_Tecnica";
+        Integer totalCitas = jdbcTemplate.queryForObject(countSql, Integer.class);
+        System.out.println("=== DEBUG: Total de citas en BD: " + totalCitas + " ===");
+
+        // Consulta con LEFT JOIN para incluir todas las citas
         String sql = """
             SELECT ct.*, 
-                   CONCAT(cl.Nombre, ' ', cl.Apellido) AS nombreCliente,
-                   CONCAT(emp.Nombre, ' ', emp.Apellido) AS nombreEmpleado
+                   (cl.Nombre || ' ' || cl.Apellido) AS nombreCliente,
+                   (emp.Nombre || ' ' || emp.Apellido) AS nombreEmpleado
             FROM Cita_Tecnica ct
-            INNER JOIN Cliente cl ON ct.ID_Cliente = cl.ID_Usuario
-            INNER JOIN Empleado emp ON ct.ID_Empleado = emp.ID_Usuario
+            LEFT JOIN Cliente cl ON ct.ID_Cliente = cl.ID_Usuario
+            LEFT JOIN Empleado emp ON ct.ID_Empleado = emp.ID_Usuario
             ORDER BY ct.Fecha_Programada DESC
         """;
-        return jdbcTemplate.query(sql, mapper);
+
+        List<CitaTecnica> citas = jdbcTemplate.query(sql, mapper);
+        System.out.println("=== DEBUG: Citas encontradas con JOIN: " + citas.size() + " ===");
+
+        // Debug: mostrar información de cada cita
+        for (CitaTecnica cita : citas) {
+            System.out.println("Cita ID: " + cita.getIdCitaTecnica() +
+                    ", Cliente: " + cita.getIdCliente() + " (" + cita.getNombreCliente() + ")" +
+                    ", Empleado: " + cita.getIdEmpleado() + " (" + cita.getNombreEmpleado() + ")");
+        }
+
+        return citas;
     }
 
     @Override
     public CitaTecnica buscarPorId(int id) {
         String sql = """
             SELECT ct.*, 
-                   CONCAT(cl.Nombre, ' ', cl.Apellido) AS nombreCliente,
-                   CONCAT(emp.Nombre, ' ', emp.Apellido) AS nombreEmpleado
+                   (cl.Nombre || ' ' || cl.Apellido) AS nombreCliente,
+                   (emp.Nombre || ' ' || emp.Apellido) AS nombreEmpleado
             FROM Cita_Tecnica ct
-            INNER JOIN Cliente cl ON ct.ID_Cliente = cl.ID_Usuario
-            INNER JOIN Empleado emp ON ct.ID_Empleado = emp.ID_Usuario
+            LEFT JOIN Cliente cl ON ct.ID_Cliente = cl.ID_Usuario
+            LEFT JOIN Empleado emp ON ct.ID_Empleado = emp.ID_Usuario
             WHERE ct.ID_CitaTecnica = ?
         """;
         return jdbcTemplate.queryForObject(sql, mapper, id);
@@ -75,7 +103,8 @@ public class CitaTecnicaDAOImpl implements CitaTecnicaDAO {
                 cita.getServicio(),
                 cita.getEstado(),
                 cita.getDescripcion(),
-                cita.getFechaProgramada());
+                cita.getFechaProgramadaAsTimestamp() != null ?
+                        cita.getFechaProgramadaAsTimestamp().toString().substring(0, 19) : null);
     }
 
     @Override
@@ -91,7 +120,8 @@ public class CitaTecnicaDAOImpl implements CitaTecnicaDAO {
                 cita.getServicio(),
                 cita.getEstado(),
                 cita.getDescripcion(),
-                cita.getFechaProgramada(),
+                cita.getFechaProgramadaAsTimestamp() != null ?
+                        cita.getFechaProgramadaAsTimestamp().toString().substring(0, 19) : null,
                 cita.getIdCitaTecnica());
     }
 
